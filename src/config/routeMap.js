@@ -1,3 +1,7 @@
+/**
+ * https://github.com/jamiebuilds/react-loadable
+ * react-loadable : A higher order component for loading components with dynamic imports.
+ */
 import Loadable from 'react-loadable';
 import Loading from '@/components/Loading'
 const Dashboard = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/dashboard'),loading: Loading});

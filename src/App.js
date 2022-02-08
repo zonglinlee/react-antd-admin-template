@@ -3,10 +3,11 @@ import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import store from "./store";
+// 引入路由
 import Router from "./router";
 
 class App extends Component {
-  render() { 
+  render() {
     return (
       <ConfigProvider locale={zhCN}>
         <Provider store={store}>
@@ -16,5 +17,5 @@ class App extends Component {
     );
   }
 }
- 
+
 export default App;

@@ -8,7 +8,7 @@ import { getMenuItemInMenuListByProperty } from "@/utils";
 import routeList from "@/config/routeMap";
 import menuList from "@/config/menuConfig";
 const { Content } = Layout;
-
+// react-router-dom 参考：https://v5.reactrouter.com/web/example/basic
 const getPageTitle = (menuList, pathname) => {
   let title = "Ant Design Pro";
   let item = getMenuItemInMenuListByProperty(menuList, "path", pathname);
@@ -17,7 +17,12 @@ const getPageTitle = (menuList, pathname) => {
   }
   return title;
 };
+/**
+ * A <Switch> looks through all its children <Route> elements and renders the first one whose path
+ * matches the current URL. Use a <Switch> any time you have multiple routes, but you want only oneof them to render at a time
+ */
 
+// Rendering a <Redirect> will navigate to a new location. The new location will override the current location in the history stack
 const LayoutContent = (props) => {
   const { role, location } = props;
   const { pathname } = location;
@@ -56,5 +61,8 @@ const LayoutContent = (props) => {
     </DocumentTitle>
   );
 };
-
+/**
+ * You can get access to the history object’s properties and the closest <Route>'s match via the withRouter higher-order component.
+ * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
+ * */
 export default connect((state) => state.user)(withRouter(LayoutContent));
