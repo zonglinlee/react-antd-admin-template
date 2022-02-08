@@ -15,6 +15,12 @@ import { tableList, deleteItem,editItem } from "@/api/table";
 import EditForm from "./forms/editForm"
 const { Column } = Table;
 const { Panel } = Collapse;
+// React.Component 类的属性（this.state,this.props等等）以及方法(this.setState, this.forceUpdate等等) ： https://zh-hans.reactjs.org/docs/react-component.html
+/**
+ * 挂载：当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下
+ * constructor() -> static getDerivedStateFromProps() -> render() -> componentDidMount()
+ */
+
 class TableComponent extends Component {
   _isMounted = false; // 这个变量是用来标志当前组件是否挂载
   state = {
@@ -143,7 +149,7 @@ class TableComponent extends Component {
       }).catch(e => {
         message.success("编辑失败,请重试!")
       })
-      
+
     });
   };
 
@@ -153,6 +159,7 @@ class TableComponent extends Component {
     });
   };
   render() {
+    // antD-table ；https://ant-design.gitee.io/components/table-cn/
     return (
       <div className="app-container">
         <Collapse defaultActiveKey={["1"]}>
@@ -209,7 +216,7 @@ class TableComponent extends Component {
             );
           }}/>
           <Column title="时间" dataIndex="date" key="date" width={195} align="center"/>
-          <Column title="操作" key="action" width={195} align="center"render={(text, row) => (
+          <Column title="操作" key="action" width={195} align="center" render={(text, row) => (
             <span>
               <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEdit.bind(null,row)}/>
               <Divider type="vertical" />
@@ -236,7 +243,7 @@ class TableComponent extends Component {
           confirmLoading={this.state.editModalLoading}
           onCancel={this.handleCancel}
           onOk={this.handleOk}
-        />  
+        />
       </div>
     );
   }
