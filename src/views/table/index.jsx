@@ -160,6 +160,8 @@ class TableComponent extends Component {
   };
   render() {
     // antD-table ；https://ant-design.gitee.io/components/table-cn/
+    // https://zh.javascript.info/class (Class 基本语法)
+    // https://zh.javascript.info/bind (函数绑定)
     return (
       <div className="app-container">
         <Collapse defaultActiveKey={["1"]}>
@@ -195,17 +197,18 @@ class TableComponent extends Component {
         </Collapse>
         <br />
         <Table
+          scroll={{x: true}}
           bordered
           rowKey={(record) => record.id}
           dataSource={this.state.list}
           loading={this.state.loading}
           pagination={false}
         >
-          <Column title="序号" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
+          <Column title="序号" dataIndex="id" key="id" width={80} align="center" sorter={(a, b) => a.id - b.id}/>
           <Column title="标题" dataIndex="title" key="title" width={200} align="center"/>
           <Column title="作者" dataIndex="author" key="author" width={100} align="center"/>
           <Column title="阅读量" dataIndex="readings" key="readings" width={195} align="center"/>
-          <Column title="推荐指数" dataIndex="star" key="star" width={195} align="center"/>
+          <Column title="推荐指数" dataIndex="star" key="star" width={155} align="center"/>
           <Column title="状态" dataIndex="status" key="status" width={195} align="center" render={(status) => {
             let color =
               status === "published" ? "green" : status === "deleted" ? "red" : "";
@@ -218,7 +221,7 @@ class TableComponent extends Component {
           <Column title="时间" dataIndex="date" key="date" width={195} align="center"/>
           <Column title="操作" key="action" width={195} align="center" render={(text, row) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEdit.bind(null,row)}/>
+              <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={() => this.handleEdit(row)}/>
               <Divider type="vertical" />
               <Button type="primary" shape="circle" icon="delete" title="删除" onClick={this.handleDelete.bind(null,row)}/>
             </span>
