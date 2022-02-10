@@ -239,9 +239,15 @@ class TableComponent extends Component {
           showQuickJumper
           hideOnSinglePage={true}
         />
+        {/*  */}
+        {/*
+        这里的antd库用的是3.17版本的，这个wrappedComponentRef是form表单组件独有的，在createForm调用后会执行 wrappedComponentRef 回调
+        参考：https://github.com/react-component/form#note-use-wrappedcomponentref-instead-of-withref-after-rc-form140
+        回调形式的refs : https://zh-hans.reactjs.org/docs/refs-and-the-dom.html#callback-refs
+        */}
         <EditForm
           currentRowData={this.state.currentRowData}
-          wrappedComponentRef={formRef => this.formRef = formRef}
+          wrappedComponentRef={formRef => { this.formRef = formRef }}
           visible={this.state.editModalVisible}
           confirmLoading={this.state.editModalLoading}
           onCancel={this.handleCancel}
