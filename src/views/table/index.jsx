@@ -128,9 +128,10 @@ class TableComponent extends Component {
       editModalVisible: true,
     });
   };
-
+  // 这种箭头函数的写法不用在 class 的 constructor 中 bind this 指向
+  // https://zh.javascript.info/class#shi-yong-lei-zi-duan-zhi-zuo-bang-ding-fang-fa
   handleOk = _ => {
-    const { form } = this.formRef.props;
+    const { form } = this.formRef.props; // 拿到form对象，调用form上的方法
     form.validateFields((err, fieldsValue) => {
       if (err) {
         return;

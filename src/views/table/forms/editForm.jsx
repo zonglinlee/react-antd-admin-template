@@ -12,7 +12,13 @@ class EditForm extends Component {
       form,
       confirmLoading,
       currentRowData,
-    } = this.props;
+    } = this.props; // 父组件使用的是经过 Form.create 包装的组件，该组件将会自带 this.props.form 属性
+    // https://3x.ant.design/components/form-cn/#this.props.form.getFieldDecorator(id,-options)
+    // https://github.com/react-component/form#getfielddecoratornamestring-option-object--reactnode--reactnode
+    // 经过 getFieldDecorator 包装的控件，表单控件会自动添加 value（或 valuePropName 指定的其他属性）
+    // onChange（或 trigger 指定的其他属性），数据同步将被 Form 接管
+    // 函数签名（参数是name,option,返回的是一个函数，该函数接受一个React.Node）
+    // getFieldDecorator(name:String, option: Object) => (React.Node) => React.Node
     const { getFieldDecorator } = form;
     const { id, author, date, readings, star, status, title } = currentRowData;
     const formItemLayout = {
@@ -80,4 +86,6 @@ class EditForm extends Component {
   }
 }
 
+// export 一个经过 Form.create 包装的组件，该组件将会自带 this.props.form 属性
+// https://3x.ant.design/components/form-cn/#Form.create(options)
 export default Form.create({ name: "EditForm" })(EditForm);
