@@ -3,13 +3,17 @@ import { Redirect } from "react-router-dom";
 import { Form, Icon, Input, Button, message, Spin } from "antd";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
+// 引入当前组件样式
 import "./index.less";
 import { login, getUserInfo } from "@/store/actions";
 
 const Login = (props) => {
   const { form, token, login, getUserInfo } = props;
   const { getFieldDecorator } = form;
-
+  // 基础 Hook：useState 返回一个 state，以及更新 state 的函数 ： https://zh-hans.reactjs.org/docs/hooks-reference.html#basic-hooks
+  // [thing, setThing] = useState() , “array destructuring”. It means that we’re making two new variables fruit and setFruit,
+  // where fruit is set to the first value returned by useState, and setFruit is the second. It is equivalent to this code
+  // 这个类似于Vue3的响应式api  reactive ref 参考： https://v3.cn.vuejs.org/api/reactivity-api.html
   const [loading, setLoading] = useState(false);
 
   const handleLogin = (username, password) => {
@@ -125,7 +129,9 @@ const Login = (props) => {
 };
 
 const WrapLogin = Form.create()(Login);
-
+// connect api : https://react-redux.js.org/tutorials/connect#connecting-the-components
+// :给当前组件分发需要的 state 和 actions 等,这是一个高阶函数，接收一个 ReactComponent ,返回一个 ReactComponent
+// React Redux provides a connect function for you to read values from the Redux store (and re-read the values when the store updates).
 export default connect((state) => state.user, { login, getUserInfo })(
   WrapLogin
 );
